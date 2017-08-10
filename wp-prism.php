@@ -69,7 +69,7 @@ function wp_prism_code_block($content) {
     $langs = array();
     $replacements = 0;
 
-    $new_content = preg_replace_callback('/^``` *(\S*).*?[\r\n]*(.*?)```/ms',
+    $new_content = preg_replace_callback('/^(?:\<pre\>)?``` *([a-zA-Z0-9+._-]*)[\r\n]+(.*?)```(?:\r?\n?\<\/pre\>)/ms',
         function($match) use (&$langs) {
             $lang = prism_language_map(strtolower($match[1]));
             if (strlen($lang) > 0) {
