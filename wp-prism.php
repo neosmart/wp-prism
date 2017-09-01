@@ -1,7 +1,7 @@
 <?php
 /*
-Plugin Name: Prism for WordPress
-Plugin URI: https://neosmart.net/
+Plugin Name: WP-Prism
+Plugin URI: https://neosmart.net/blog/2017/wp-prism/
 Description: Translates fenced codeblocks (<code>```</code>) to prism
 Author: Mahmoud Al-Qudsi
 Version: 0.1
