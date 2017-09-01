@@ -31,7 +31,8 @@ fn main() {
 
 ## How to install
 
-Just grab a copy of `wp-prism` from the WordPress plugins repository or clone our github repo from https://github.com/neosmart/wp-prism
+Just grab a copy of `wp-prism` from the WordPress plugins repository or clone our github repo from [https://github.com/neosmart/wp-prism](https://github.com/neosmart/wp-prism).
+
 There is no configuration needed.
 
 ## Avoiding whitespace mangling
