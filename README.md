@@ -49,3 +49,9 @@ To illustrate with an example:
     ```
     </pre>
  
+```cpp
+void Greet(const char *name)
+{
+    printf("Hello %s!\n", name);
+}
+```
