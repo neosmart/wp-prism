@@ -23,18 +23,18 @@ dist/prism/components/%.min.js: bower_components/prism/components/%.min.js dist/
 dist/prism/themes: dist/prism
 	mkdir -p dist/prism/themes
 
-dist/prism/themes/prism-nst.min.css: dist/prism/themes
+dist/prism/themes/prism-nst.min.css: dist/prism/themes /usr/local/bin/cleancss
 	curl https://cdn.rawgit.com/PrismJS/prism-themes/master/themes/prism-ghcolors.css | sed 's/font-family: .*/font-family: "SFConsole","SFMono","SF Mono","San Francisco Mono",Menlo,Consolas,Source Code Pro,Inconsolata-G,DejaVu Sans Mono,"Bitstream Vera Sansa Mono",Anonymous Pro,Monaco,"Courier 10 Pitch",Courier,monospace;/g' | cleancss > dist/prism/themes/prism-nst.min.css
 
-dist/prism/themes/%.min.css: bower_components/prism/themes/%.css dist/prism/themes bower_components/prism/prism.js
+dist/prism/themes/%.min.css: bower_components/prism/themes/%.css dist/prism/themes bower_components/prism/prism.js /usr/local/bin/cleancss
 	cleancss $< > $@
 	@touch $@
 
 dist:
-	mkdir -p dist
+	mkdir dist
 
-dist/prism:
-	mkdir -p dist/prism
+dist/prism: dist
+	mkdir dist/prism
 
 bower_components:
 	bower install
