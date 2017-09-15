@@ -1,0 +1,31 @@
+{
+  "name": "wp-prism",
+  "description": "Fenced code blocks for WordPress, with highlighting by prism.",
+  "main": "index.js",
+  "authors": [
+    "NeoSmart Technologies",
+    "Mahmoud Al-Qudsi"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "syntax-highlighting",
+    "wordpress",
+    "plugin",
+    "wp-plugin",
+    "prism",
+    "wp-prism",
+    "neosmart"
+  ],
+  "homepage": "https://github.com/neosmart/wp-prism",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "prism": "prismjs#^1.7.0"
+  }
+}
