@@ -1,5 +1,6 @@
 THEMES := $(addsuffix .min.css, $(addprefix dist/prism/themes/, $(basename $(notdir $(wildcard bower_components/prism/themes/*.css))))) dist/prism/themes/prism-nst.min.css
 COMPONENTS := $(addprefix dist/prism/components/, $(notdir $(wildcard bower_components/prism/components/*.min.js)))
+$(shell chmod +x ./prismversion.sh)
 PRISM_VERSION := $(shell ./prismversion.sh)
 
 plugin: dist/prism/prism.min.js dist/README.md dist/wp-prism.php $(THEMES) $(COMPONENTS)
@@ -31,10 +32,10 @@ dist/prism/themes/%.min.css: bower_components/prism/themes/%.css dist/prism/them
 	@touch $@
 
 dist:
-	mkdir dist
+	mkdir -p dist
 
 dist/prism: dist
-	mkdir dist/prism
+	mkdir -p dist/prism
 
 bower_components:
 	bower install
@@ -47,7 +48,11 @@ bower_components:
 	@echo Installing clean-css-cli
 	sudo npm i -g clean-css-cli
 
-bower_components/prism/prism.js: bower.json
+bower_components/prism/prism.js: /usr/local/bin/bower bower.json
 	bower update
+	@touch bower_components/prism/prism.js
+
+/usr/local/bin/bower:
+	sudo npm i -g bower
 
 .PHONY: plugin
