@@ -87,7 +87,7 @@ function wp_prism_code_block($content) {
 
         wp_enqueue_script("prism", plugin_dir_url( __FILE__ ) . "prism/prism.min.js",
             array(), $prism_version, true);
-        wp_enqueue_style("prism-nst", plugin_dir_url( __FILE__ ) . "prism/themes/prism-nst.css",
+        wp_enqueue_style("prism-nst", plugin_dir_url( __FILE__ ) . "prism/themes/prism-nst.min.css",
             array(), $prism_version);
 
         //enqueue the dependencies for languages we used
