@@ -2,7 +2,7 @@
 /*
 Plugin Name: WP-Prism
 Plugin URI: https://neosmart.net/blog/2017/wp-prism/
-Description: Translates fenced codeblocks (<code>```</code>) to prism
+Description: Translates fenced codeblocks (<code>```</code>) to syntax-highlighted &lt;pre&gt; and &lt;code&gt; snippets
 Author: Mahmoud Al-Qudsi
 Version: 0.1
 Author URI: https://neosmart.net/
