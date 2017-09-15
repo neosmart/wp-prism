@@ -10,6 +10,8 @@ Author URI: https://neosmart.net/
 
 add_filter("the_content", "wp_prism_code_block", 1);
 
+$prism_version = null;
+
 function prism_resolve_dependencies($langs) {
     //derived from https://github.com/PrismJS/prism/blob/gh-pages/components.js#L38
     //markup, clike, and javascript are included by default, always
@@ -83,13 +85,11 @@ function wp_prism_code_block($content) {
     if ($replacements > 0) {
         $langs = array_unique($langs);
 
-        wp_enqueue_script("prism", "https://cdnjs.cloudflare.com/ajax/libs/prism/1.6.0/prism.min.js",
-            array(), null, true);
-        // wp_enqueue_style("prism-css", "https://cdnjs.cloudflare.com/ajax/libs/prism/1.6.0/themes/prism.min.css",
-        //     array(), null);
+        wp_enqueue_script("prism", plugin_dir_url( __FILE__ ) . "prism/prism.min.js",
+            array(), $prism_version, true);
         wp_enqueue_style("prism-ghcolors",
             "https://cdn.rawgit.com/PrismJS/prism-themes/master/themes/prism-ghcolors.css",
-            array(), null);
+            array(), $prism_version);
 
         //enqueue the dependencies for languages we used
         $requirements = prism_resolve_dependencies($langs);
@@ -97,7 +97,7 @@ function wp_prism_code_block($content) {
         foreach ($requirements as $requirement) {
             wp_enqueue_script("prism-{$requirement}",
                 "https://cdnjs.cloudflare.com/ajax/libs/prism/1.6.0/components/prism-{$requirement}.min.js",
-                array("prism"), null, true);
+                array("prism"), $prism_version, true);
             array_push($requirement_handles, "prism-" . $requirement);
         }
 
@@ -105,7 +105,7 @@ function wp_prism_code_block($content) {
         foreach($langs as $lang) {
             wp_enqueue_script("prism-{$lang}",
                 "https://cdnjs.cloudflare.com/ajax/libs/prism/1.6.0/components/prism-{$lang}.min.js",
-                $requirement_handles, null, true);
+                $requirement_handles, $prism_version, true);
         }
         return $new_content;
     }

@@ -1,30 +1,39 @@
-plugin: bower_components/prism/prism.js dist dist/prism/prism.min.js dist/README.md dist/wp-prism.php components themes
+THEMES := $(addsuffix .min.css, $(addprefix dist/prism/themes/, $(basename $(notdir $(wildcard bower_components/prism/themes/*.css))))) dist/prism/themes/prism-nst.min.css
+COMPONENTS := $(addprefix dist/prism/components/, $(notdir $(wildcard bower_components/prism/components/*.min.js)))
+PRISM_VERSION := $(shell ./prismversion.sh)
 
-dist/README.md: README.md
+plugin: dist/prism/prism.min.js dist/README.md dist/wp-prism.php $(THEMES) $(COMPONENTS)
+
+dist/README.md: dist README.md
 	cp README.md dist/
 
-dist/wp-prism.php: wp-prism.php
-	cp wp-prism.php dist/
+dist/wp-prism.php: dist wp-prism.php
+	sed "s/\$$prism_version = null;/\$$prism_version = \"$(PRISM_VERSION)\";/g" ./wp-prism.php > dist/wp-prism.php
 
-dist/prism/prism.min.js: /usr/local/bin/uglifyjs bower_components/prism/prism.js
+dist/prism/prism.min.js: dist/prism /usr/local/bin/uglifyjs bower_components/prism/prism.js
 	uglifyjs ./bower_components/prism/prism.js > dist/prism/prism.min.js
 
-dist/prism/components: bower_components bower_components/prism/components.js
-	mkdir dist/prism/components
-	cp -a ./bower_components/prism/components/*.min.js dist/prism/components/
+dist/prism/components: dist/prism bower_components bower_components/prism/components.js
+	mkdir -p dist/prism/components
 
-dist/prism/themes: bower_components bower_components/prism/themes/
-	mkdir dist/prism/themes
+dist/prism/components/%.min.js: bower_components/prism/components/%.min.js dist/prism/components bower_components/prism/prism.js
+	cp $< $@
+	@touch $@
 
-themes: dist/prism/themes $(wildcard dist/prism/themes/*.css) dist/prism/themes/prism-nst.css
-	for css in `find bower_components/prism/themes/ -iname "*.css"`; do cleancss $${css} > dist/prism/themes/`basename -s .css $${css}`.min.css; done
+dist/prism/themes: dist/prism
+	mkdir -p dist/prism/themes
 
-dist/prism/themes/prism-nst.css:
+dist/prism/themes/prism-nst.min.css: dist/prism/themes
 	curl https://cdn.rawgit.com/PrismJS/prism-themes/master/themes/prism-ghcolors.css | sed 's/font-family: .*/font-family: "SFConsole","SFMono","SF Mono","San Francisco Mono",Menlo,Consolas,Source Code Pro,Inconsolata-G,DejaVu Sans Mono,"Bitstream Vera Sansa Mono",Anonymous Pro,Monaco,"Courier 10 Pitch",Courier,monospace;/g' | cleancss > dist/prism/themes/prism-nst.min.css
 
-components: dist/prism/components
+dist/prism/themes/%.min.css: bower_components/prism/themes/%.css dist/prism/themes bower_components/prism/prism.js
+	cleancss $< > $@
+	@touch $@
 
 dist:
+	mkdir -p dist
+
+dist/prism:
 	mkdir -p dist/prism
 
 bower_components:
@@ -41,4 +50,4 @@ bower_components:
 bower_components/prism/prism.js: bower.json
 	bower update
 
-.PHONY: plugin components themes
+.PHONY: plugin
