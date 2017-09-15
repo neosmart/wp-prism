@@ -87,24 +87,21 @@ function wp_prism_code_block($content) {
 
         wp_enqueue_script("prism", plugin_dir_url( __FILE__ ) . "prism/prism.min.js",
             array(), $prism_version, true);
-        wp_enqueue_style("prism-ghcolors",
-            "https://cdn.rawgit.com/PrismJS/prism-themes/master/themes/prism-ghcolors.css",
+        wp_enqueue_style("prism-nst", plugin_dir_url( __FILE__ ) . "prism/themes/prism-nst.css",
             array(), $prism_version);
 
         //enqueue the dependencies for languages we used
         $requirements = prism_resolve_dependencies($langs);
         $requirement_handles = array();
         foreach ($requirements as $requirement) {
-            wp_enqueue_script("prism-{$requirement}",
-                "https://cdnjs.cloudflare.com/ajax/libs/prism/1.6.0/components/prism-{$requirement}.min.js",
+            wp_enqueue_script("prism-{$requirement}", plugin_dir_url( __FILE__ ) . "prism/components/prism-{$requirement}.min.js",
                 array("prism"), $prism_version, true);
             array_push($requirement_handles, "prism-" . $requirement);
         }
 
         //enqueue the individual language scripts
         foreach($langs as $lang) {
-            wp_enqueue_script("prism-{$lang}",
-                "https://cdnjs.cloudflare.com/ajax/libs/prism/1.6.0/components/prism-{$lang}.min.js",
+            wp_enqueue_script("prism-{$lang}", plugin_dir_url( __FILE__ ) . "prism/components/prism-{$lang}.min.js",
                 $requirement_handles, $prism_version, true);
         }
         return $new_content;
