@@ -1,0 +1,62 @@
+dir = dist2
+
+rule jsmin
+    command = uglifyjs $in > $out
+
+rule cssmin
+    command = cleancss $in > $out
+
+rule download
+    command = curl "$url" > $out
+
+rule bowerupdate
+    command = bower update; touch $out
+
+rule bowerinstall
+    command = bower install; touch $out
+
+rule asis
+    command = cp $in $out
+
+rule cpdir
+    command = cp -a $in $out
+
+rule version
+    command = sed "s/\$$prism_version = null;/\$$prism_version = \"$$(./prismversion.sh)\";/g" $in > $out
+
+rule md5sum
+    command = tar -cf - $in | md5sum > $out
+
+rule update_nst_css
+    command = sed 's/font-family: .*/font-family: "SFConsole","SFMono","SF Mono","San Francisco Mono",Menlo,Consolas,Source Code Pro,Inconsolata-G,DejaVu Sans Mono,"Bitstream Vera Sansa Mono",Anonymous Pro,Monaco,"Courier 10 Pitch",Courier,monospace;/g' $in > $out
+
+build $dir/README.md: asis README.md
+build .cache/prism-ghcolors.css: download
+    url = https://cdn.rawgit.com/PrismJS/prism-themes/master/themes/prism-ghcolors.css
+build bower_components: bowerinstall | bower.json
+build $dir/wp-prism.php: version wp-prism.php | prismversion.sh bower_components
+build $dir/prism/prism.min.js: jsmin bower_components/prism/prism.js
+build bower_components/prism/prism.js: bowerinstall | bower_components
+
+build .cache/prism-nst.css: update_nst_css .cache/prism-ghcolors.css
+build $dir/prism/themes/prism-nst.min.css: cssmin .cache/prism-nst.css
+
+#build .cache/themes_md5sum: md5sum bower_components/prism/themes
+#build $dir/prism/themes: asis bower_components/prism/themes | .cache/themes_md5sum
+
+# for f in (ls bower_components/prism/themes/*.css)
+#     echo build \$dir/prism/themes/(basename -s .css $f).min.css: cssmin $f
+# end
+build $dir/prism/themes/prism-coy.min.css: cssmin bower_components/prism/themes/prism-coy.css
+build $dir/prism/themes/prism-dark.min.css: cssmin bower_components/prism/themes/prism-dark.css
+build $dir/prism/themes/prism-funky.min.css: cssmin bower_components/prism/themes/prism-funky.css
+build $dir/prism/themes/prism-okaidia.min.css: cssmin bower_components/prism/themes/prism-okaidia.css
+build $dir/prism/themes/prism-solarizedlight.min.css: cssmin bower_components/prism/themes/prism-solarizedlight.css
+build $dir/prism/themes/prism-tomorrow.min.css: cssmin bower_components/prism/themes/prism-tomorrow.css
+build $dir/prism/themes/prism-twilight.min.css: cssmin bower_components/prism/themes/prism-twilight.css
+build $dir/prism/themes/prism.min.css: cssmin bower_components/prism/themes/prism.css
+
+build $dir/prism/components: cpdir bower_components/prism/components
+# for f in (ls bower_components/prism/components/*.min.js)
+#     echo build \$dir/prism/components/(basename $f): asis $f
+# end
