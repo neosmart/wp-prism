@@ -1,4 +1,4 @@
-dir = dist2
+dir = dist
 
 rule jsmin
     command = uglifyjs $in > $out
