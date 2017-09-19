@@ -3,5 +3,5 @@ build
 .cache
 dist
 .ninja_deps
-.ninja_logs
+.ninja_log
 tags
