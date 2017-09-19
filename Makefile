@@ -59,4 +59,10 @@ bower_components/prism/prism.js: /usr/local/bin/bower bower.json
 /usr/local/bin/bower:
 	sudo npm i -g bower
 
+zip: plugin
+	cp -a dist wp-prism
+	rm -f wp-prism-$(PRISM_VERSION).zip
+	zip -r wp-prism-$(PRISM_VERSION).zip wp-prism
+	rm -rf wp-prism
+
 .PHONY: plugin
