@@ -68,6 +68,8 @@ function prism_language_map($lang) {
 }
 
 function wp_prism_code_block($content) {
+    global $prism_version;
+
     $langs = array();
     $replacements = 0;
 
