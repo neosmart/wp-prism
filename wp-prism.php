@@ -94,7 +94,7 @@ function wp_prism_code_block($content) {
 
         //enqueue the dependencies for languages we used
         $requirements = prism_resolve_dependencies($langs);
-        $requirement_handles = array();
+        $requirement_handles = array('prism');
         foreach ($requirements as $requirement) {
             wp_enqueue_script("prism-{$requirement}", plugin_dir_url( __FILE__ ) . "prism/components/prism-{$requirement}.min.js",
                 array("prism"), $prism_version, true);
