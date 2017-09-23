@@ -15,7 +15,7 @@ rule bowerupdate
     command = bower update;
 
 rule bowerinstall
-    command = bower install --force
+    command = bower install --force && touch $out
 
 rule asis
     command = cp $in $out
