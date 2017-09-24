@@ -21,7 +21,7 @@ rule asis
     command = cp $in $out
 
 rule cpdir
-    command = cp -a $in $out
+    command = cp -a $in/ $out
 
 rule version
     command = sed "s/\$$prism_version = null;/\$$prism_version = \"$$(./prismversion.sh)\";/g" $in > $out
