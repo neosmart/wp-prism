@@ -40,6 +40,7 @@ build $dir/prism/prism.min.js: jsmin bower_components/prism/prism.js
 
 build .cache/prism-nst.css: update_nst_css .cache/prism-ghcolors.css
 build $dir/prism/themes/prism-nst.min.css: cssmin .cache/prism-nst.css
+build $dir/prism/components: cpdir bower_components/prism/components | bower_components
 
 #build .cache/themes_md5sum: md5sum bower_components/prism/themes
 #build $dir/prism/themes: asis bower_components/prism/themes | .cache/themes_md5sum
@@ -49,7 +50,7 @@ build $dir/prism/themes/prism-nst.min.css: cssmin .cache/prism-nst.css
 #   set themes $themes\ $f
 #   echo build \$dir/prism/themes/(basename -s .css $f).min.css: cssmin $f
 # end
-# echo build bower_components bower_components/prism/prism.js $themes: bowerinstall
+# echo build bower_components{,/prism{/prism.js,/components,/themes}} $themes: bowerinstall
 build $dir/prism/themes/prism-coy.min.css: cssmin bower_components/prism/themes/prism-coy.css
 build $dir/prism/themes/prism-dark.min.css: cssmin bower_components/prism/themes/prism-dark.css
 build $dir/prism/themes/prism-funky.min.css: cssmin bower_components/prism/themes/prism-funky.css
@@ -58,8 +59,4 @@ build $dir/prism/themes/prism-solarizedlight.min.css: cssmin bower_components/pr
 build $dir/prism/themes/prism-tomorrow.min.css: cssmin bower_components/prism/themes/prism-tomorrow.css
 build $dir/prism/themes/prism-twilight.min.css: cssmin bower_components/prism/themes/prism-twilight.css
 build $dir/prism/themes/prism.min.css: cssmin bower_components/prism/themes/prism.css
-build bower_components/prism/prism.js bower_components/prism/themes/prism-coy.css bower_components/prism/themes/prism-dark.css bower_components/prism/themes/prism-funky.css bower_components/prism/themes/prism-okaidia.css bower_components/prism/themes/prism-solarizedlight.css bower_components/prism/themes/prism-tomorrow.css bower_components/prism/themes/prism-twilight.css bower_components/prism/themes/prism.css: bowerinstall | bower.json
-
-# for f in (ls bower_components/prism/components/*.min.js)
-#     echo build \$dir/prism/components/(basename $f): asis $f
-# end
+build bower_components bower_components/prism/components bower_components/prism/prism.js bower_components/prism/themes/prism-coy.css bower_components/prism/themes/prism-dark.css bower_components/prism/themes/prism-funky.css bower_components/prism/themes/prism-okaidia.css bower_components/prism/themes/prism-solarizedlight.css bower_components/prism/themes/prism-tomorrow.css bower_components/prism/themes/prism-twilight.css bower_components/prism/themes/prism.css: bowerinstall | bower.json
