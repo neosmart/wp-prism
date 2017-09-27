@@ -5,3 +5,4 @@ dist
 .ninja_deps
 .ninja_log
 tags
+wp-prism-*.zip
