@@ -8,7 +8,7 @@ Version: 0.1
 Author URI: https://neosmart.net/
 */
 
-add_filter("the_content", "wp_prism_code_block", 1);
+add_filter("the_content", "wp_prism_code_block", 2);
 
 $prism_version = null;
 
