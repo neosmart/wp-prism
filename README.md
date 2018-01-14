@@ -13,13 +13,11 @@ You can say goodbye to page bloat and long load times, because it makes no sense
 wp-prism does exactly what it says on the box: it takes a code-fenced block of source code nested in your WordPress pages and posts, like this:
 
     ```rust
-    
+
     fn main() {
-    
         println!("Hello, world!");
-    
     }
-    
+
     ```
 And turns into a syntax-highlighted work of art, like this:
 
@@ -49,7 +47,7 @@ To illustrate with an example:
     }
     ```
     </pre>
- 
+
 ```cpp
 void Greet(const char *name)
 {
