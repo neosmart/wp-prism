@@ -14,28 +14,85 @@ $prism_version = null;
 $prism_root = plugin_dir_url(__FILE__) . "prism";
 
 function prism_resolve_dependencies($langs) {
-    // Derived from https://github.com/PrismJS/prism/blob/gh-pages/components.js#L38
+    // Generated via dependencyMap.ts
     // markup, clike, and javascript are included by default, always
     $deps = array(
-        "c" => array(
-            "bison",
+        "arduino" => array(
             "cpp",
-            "objectivec",
+            "c",
         ),
-        "ruby" => array(
-            "crystal",
-            "haml",
+        "aspnet" => array(
+            "csharp",
         ),
-        "css" => array(
-            "less",
-            "sass",
-            "scss",
+        "bison" => array(
+            "c",
         ),
-        "java" => array(
-            "scala",
+        "cpp" => array(
+            "c",
         ),
-        "basic" => array(
-            "vbnet",
+        "crystal" => array(
+            "ruby",
+        ),
+        "css-extras" => array(
+            "css",
+        ),
+        "erb" => array(
+            "ruby",
+            "markup-templating",
+        ),
+        "haml" => array(
+            "ruby",
+        ),
+        "handlebars" => array(
+            "markup-templating",
+        ),
+        "less" => array(
+            "css",
+        ),
+        "objectivec" => array(
+            "c",
+        ),
+        "opencl" => array(
+            "cpp",
+            "c",
+        ),
+        "php" => array(
+            "markup-templating",
+        ),
+        "php-extras" => array(
+            "php",
+            "markup-templating",
+        ),
+        "plsql" => array(
+            "sql",
+        ),
+        "tsx" => array(
+            "jsx",
+            "typescript",
+        ),
+        "sass" => array(
+            "css",
+        ),
+        "scss" => array(
+            "css",
+        ),
+        "scala" => array(
+            "java",
+        ),
+        "smarty" => array(
+            "markup-templating",
+        ),
+        "soy" => array(
+            "markup-templating",
+        ),
+        "tap" => array(
+            "yaml",
+        ),
+        "tt2" => array(
+            "markup-templating",
+        ),
+        "vbnet" => array(
+            "basic",
         ),
     );
 

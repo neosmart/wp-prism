@@ -1,0 +1,12 @@
+{
+	"compileOnSave": true,
+	"compilerOptions": {
+		"target": "esnext",
+		"allowSyntheticDefaultImports": true,
+		"module": "commonjs",
+		"lib": [ "es7", "dom" ],
+		"moduleResolution": "node",
+		"noImplicitAny": false,
+		"strictNullChecks": true
+	}
+}
