@@ -1,11 +1,11 @@
 dir = dist
 
 rule jsmin
-    #install with `sudo npm install -g uglify-js`
+    # install with `sudo npm install -g uglify-js`
     command = uglifyjs $in > $out
 
 rule cssmin
-    #install with `sudo npm install -g clean-css-cli`
+    # install with `sudo npm install -g clean-css-cli`
     command = cleancss $in > $out
 
 rule download
@@ -30,7 +30,7 @@ rule md5sum
     command = tar -cf - $in | md5sum > $out
 
 rule update_nst_css
-    command = sed 's/font-family: .*/font-family: "SFConsole","SFMono","SF Mono","San Francisco Mono",Menlo,Consolas,Source Code Pro,Inconsolata-G,DejaVu Sans Mono,"Bitstream Vera Sansa Mono",Anonymous Pro,Monaco,"Courier 10 Pitch",Courier,monospace;/g' $in > $out
+    command = sed 's/font-family: .*/font-family: SFConsole,SFMono,SF Mono,Menlo,Consolas,Source Code Pro,Inconsolata-G,DejaVu Sans Mono,Bitstream Vera Sansa Mono,Anonymous Pro,Monaco,monospace;/g; s/0.95em/0.9em/g' $in > $out
 
 build $dir/README.md: asis README.md
 build .cache/prism-ghcolors.css: download
