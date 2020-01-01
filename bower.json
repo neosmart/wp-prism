@@ -26,6 +26,6 @@
     "tests"
   ],
   "dependencies": {
-    "prism": "prism#^1.8.1"
+    "prism": "prism#^1.17.1"
   }
 }
