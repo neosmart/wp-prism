@@ -30,7 +30,7 @@ rule md5sum
     command = tar -cf - $in | md5sum > $out
 
 rule update_nst_css
-    command = sed 's/font-family: .*/font-family: SFConsole,SFMono,SF Mono,Menlo,Consolas,Source Code Pro,Inconsolata-G,DejaVu Sans Mono,Bitstream Vera Sansa Mono,Anonymous Pro,Monaco,monospace;/g; s/1em/0.9em/g; s/font-weight: bold/font-weight: normal/g' $in > $out
+    command = sed 's/font-family: .*/font-family: SFConsole,SFMono,SF Mono,Menlo,Consolas,Source Code Pro,Inconsolata-G,DejaVu Sans Mono,Bitstream Vera Sansa Mono,Anonymous Pro,Monaco,monospace;/g; s/1em/0.9em/g; s/font-weight: bold/font-weight: normal/g; s/margin: .5em 0;//' $in > $out
 
 build $dir/README.md: asis README.md
 build .cache/prism-ghcolors.css: download
